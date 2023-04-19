@@ -1,24 +1,23 @@
 {
   "files": {
-    "main.css": "/kinyoodee-youngjum/static/css/main.002e372c.css",
-    "main.js": "/kinyoodee-youngjum/static/js/main.5bd290c6.js",
+    "main.css": "/kinyoodee-youngjum/static/css/main.4d337e67.css",
+    "main.js": "/kinyoodee-youngjum/static/js/main.32c579d9.js",
     "static/js/845.c26fdbcf.chunk.js": "/kinyoodee-youngjum/static/js/845.c26fdbcf.chunk.js",
     "static/js/787.5611f07e.chunk.js": "/kinyoodee-youngjum/static/js/787.5611f07e.chunk.js",
     "static/media/ss-img.png": "/kinyoodee-youngjum/static/media/ss-img.1085540175ca227062c4.png",
     "static/media/combo2.mp3": "/kinyoodee-youngjum/static/media/combo2.dc4a26f58622d3a5a4c0.mp3",
     "static/media/click.mp3": "/kinyoodee-youngjum/static/media/click.bac13dc239761d7d5b08.mp3",
     "static/media/instructionFinished.png": "/kinyoodee-youngjum/static/media/instructionFinished.fed3583b2d80ff6a5f4b.png",
-    "static/media/scorepage-badge.svg": "/kinyoodee-youngjum/static/media/scorepage-badge.5face1943e9f68407db0a64d97a4888a.svg",
     "static/media/losingStreak.mp3": "/kinyoodee-youngjum/static/media/losingStreak.3e9f53afed48af7cc022.mp3",
     "static/media/rotate-phone.svg": "/kinyoodee-youngjum/static/media/rotate-phone.6172f756fbd62559e2be4c10385ec685.svg",
     "index.html": "/kinyoodee-youngjum/index.html",
-    "main.002e372c.css.map": "/kinyoodee-youngjum/static/css/main.002e372c.css.map",
-    "main.5bd290c6.js.map": "/kinyoodee-youngjum/static/js/main.5bd290c6.js.map",
+    "main.4d337e67.css.map": "/kinyoodee-youngjum/static/css/main.4d337e67.css.map",
+    "main.32c579d9.js.map": "/kinyoodee-youngjum/static/js/main.32c579d9.js.map",
     "845.c26fdbcf.chunk.js.map": "/kinyoodee-youngjum/static/js/845.c26fdbcf.chunk.js.map",
     "787.5611f07e.chunk.js.map": "/kinyoodee-youngjum/static/js/787.5611f07e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.002e372c.css",
-    "static/js/main.5bd290c6.js"
+    "static/css/main.4d337e67.css",
+    "static/js/main.32c579d9.js"
   ]
 }
