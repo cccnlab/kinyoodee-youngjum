@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/kinyoodee-youngjum/static/css/main.d50b47fd.css",
+    "main.css": "/kinyoodee-youngjum/static/css/main.de048b92.css",
     "main.js": "/kinyoodee-youngjum/static/js/main.5bd290c6.js",
     "static/js/845.c26fdbcf.chunk.js": "/kinyoodee-youngjum/static/js/845.c26fdbcf.chunk.js",
     "static/js/787.5611f07e.chunk.js": "/kinyoodee-youngjum/static/js/787.5611f07e.chunk.js",
@@ -12,13 +12,13 @@
     "static/media/losingStreak.mp3": "/kinyoodee-youngjum/static/media/losingStreak.3e9f53afed48af7cc022.mp3",
     "static/media/rotate-phone.svg": "/kinyoodee-youngjum/static/media/rotate-phone.6172f756fbd62559e2be4c10385ec685.svg",
     "index.html": "/kinyoodee-youngjum/index.html",
-    "main.d50b47fd.css.map": "/kinyoodee-youngjum/static/css/main.d50b47fd.css.map",
+    "main.de048b92.css.map": "/kinyoodee-youngjum/static/css/main.de048b92.css.map",
     "main.5bd290c6.js.map": "/kinyoodee-youngjum/static/js/main.5bd290c6.js.map",
     "845.c26fdbcf.chunk.js.map": "/kinyoodee-youngjum/static/js/845.c26fdbcf.chunk.js.map",
     "787.5611f07e.chunk.js.map": "/kinyoodee-youngjum/static/js/787.5611f07e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d50b47fd.css",
+    "static/css/main.de048b92.css",
     "static/js/main.5bd290c6.js"
   ]
 }
