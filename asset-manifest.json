@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/kinyoodee-youngjum/static/css/main.c90aca77.css",
-    "main.js": "/kinyoodee-youngjum/static/js/main.720613d0.js",
+    "main.js": "/kinyoodee-youngjum/static/js/main.7f432d22.js",
     "static/js/845.c26fdbcf.chunk.js": "/kinyoodee-youngjum/static/js/845.c26fdbcf.chunk.js",
     "static/js/787.5611f07e.chunk.js": "/kinyoodee-youngjum/static/js/787.5611f07e.chunk.js",
     "static/media/ss-img.png": "/kinyoodee-youngjum/static/media/ss-img.1085540175ca227062c4.png",
@@ -13,12 +13,12 @@
     "static/media/rotate-phone.svg": "/kinyoodee-youngjum/static/media/rotate-phone.6172f756fbd62559e2be4c10385ec685.svg",
     "index.html": "/kinyoodee-youngjum/index.html",
     "main.c90aca77.css.map": "/kinyoodee-youngjum/static/css/main.c90aca77.css.map",
-    "main.720613d0.js.map": "/kinyoodee-youngjum/static/js/main.720613d0.js.map",
+    "main.7f432d22.js.map": "/kinyoodee-youngjum/static/js/main.7f432d22.js.map",
     "845.c26fdbcf.chunk.js.map": "/kinyoodee-youngjum/static/js/845.c26fdbcf.chunk.js.map",
     "787.5611f07e.chunk.js.map": "/kinyoodee-youngjum/static/js/787.5611f07e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c90aca77.css",
-    "static/js/main.720613d0.js"
+    "static/js/main.7f432d22.js"
   ]
 }
