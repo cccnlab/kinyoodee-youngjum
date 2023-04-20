@@ -12,7 +12,7 @@ function AppHeader() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (pathName === '/landing') {
+    if (pathName === '/') {
       setHeaderText(defaultHeaderText);
     } else if (pathName.includes('/spatial-span')) {
       setHeaderText(SSHeaderText);
