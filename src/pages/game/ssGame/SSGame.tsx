@@ -18,7 +18,7 @@ let progressBarElement: HTMLProgressElement;
 //Test parameters
 const flashDuration: number = 250;
 const flashInterval: number = 750;
-const trialNumber: number = 2; // to edit
+const trialNumber: number = 20; // to edit
 const initialSpan: number = 2;
 const probeNumber: number = 6;
 const allProbe: number[] = [1,2,3,4,5,6];
