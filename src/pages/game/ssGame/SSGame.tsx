@@ -26,10 +26,10 @@ const probeAngularPosition: number[] = [45, 90, 135, 225, 270, 315];
 const probeShape: string = 'circle';
 const probeParams: string = 'radius'; 
 const radius: string = (getComputedStyle(document.documentElement).getPropertyValue('--cir-base-unit') + " / 2 " );
-const cueColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-color');
-const cueBorderColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-border-color');
-const restColor: string = getComputedStyle(document.documentElement).getPropertyValue('--rest-color');
-const restBorderColor: string = getComputedStyle(document.documentElement).getPropertyValue('-rest-border-color');
+const cueColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-color').trim();
+const cueBorderColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-border-color').trim();
+const restColor: string = getComputedStyle(document.documentElement).getPropertyValue('--rest-color').trim();
+const restBorderColor: string = getComputedStyle(document.documentElement).getPropertyValue('--rest-border-color').trim();
 const rampingCorrectCount: number = 3;
 const maxFailStreakCount: number = 2;
 const maxFailCount: number = 3; 
@@ -166,7 +166,6 @@ function SSGame() {
           cueData(currSeq, cueColor, cueBorderColor, cueStartTime, cueEndTime);
           probeData(probeNumber, allProbe, restColor, restBorderColor, probeShape, probeParams, radius, probeAngularPosition);
           answerData(currAns, answerTimePerTrial);
-          trialData(currSpan, cueDataResult, probeDataResult, answerDataResult);
           timeoutList.push(
               setTimeout(function() {
                   $('.cirButton').removeClass('clicked');
@@ -395,6 +394,7 @@ function SSGame() {
       currAns = [];
       cueStartTime = [];
       cueEndTime = [];
+      answerTimePerTrial = [];
       
       timeoutList.push(
           setTimeout(function () {
@@ -532,6 +532,7 @@ function SSGame() {
       setIsItDone(true);
       let end = endTime();
       score = sumScores;
+      trialData(allSpan, cueDataResult, probeDataResult, answerDataResult);
       scoringData(trialNumber, spanMultiplier, score);
       metricData(trialNumber, summaryCorrect, spanInCorrectAns, enterStruggleTimeCount);
       postEntry(trialDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
@@ -594,12 +595,12 @@ function SSGame() {
       return answerDataResult;
   }
 
-  function trialData(currSpan: number, cueDataResult: any[], probeDataResult: any[], answerDataResult: any[]){
+  function trialData(allSpan: number[], cueDataResult: any[], probeDataResult: any[], answerDataResult: any[]){
       
-      for (let i = 0; i < 1; i++) {
+      for (let i = 0; i < currTrial; i++) {
           let obj_to_append;
           obj_to_append = {
-              "spanSize" : currSpan,
+              "spanSize" : allSpan[i],
               "cueData" : cueDataResult[i],
               "probeData" : probeDataResult[i],
               "answerData" : answerDataResult[i],
