@@ -1,0 +1,98 @@
+.circle {
+    height: calc((var(--this-width) + var(--this-height)) / 32.4736842);
+    width: calc((var(--this-width) + var(--this-height)) / 32.4736842);
+    display: inline-flex;
+    position: relative;
+    background-color: #e5e5e5;
+    border-radius: 100%;
+    margin-left: calc((var(--this-width) + var(--this-height)) / 123.4);
+    margin-right: calc((var(--this-width) + var(--this-height)) / 123.4);
+}
+
+.square {
+    height: calc((var(--this-width) + var(--this-height)) / 32.4736842);
+    width: calc((var(--this-width) + var(--this-height)) / 32.4736842);
+    display: inline-flex;
+    margin-left: calc((var(--this-width) + var(--this-height)) / 123.4);
+    margin-right: calc((var(--this-width) + var(--this-height)) / 123.4);
+    position: relative;
+    top: calc((var(--this-width) + var(--this-height)) / 123.4);
+    background-color: #e5e5e5;
+}
+
+.canvas-panel {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    place-content: center;
+}
+
+.search-text.blue {
+    color: #0072ff;
+}
+
+.search-img.blue {
+    background-color: #0072ff;
+    width: calc((var(--this-width) + var(--this-height)) / 63.2820513);
+    height: calc((var(--this-width) + var(--this-height)) / 63.2820513);
+    top: calc((var(--this-width) + var(--this-height)) / 411.333333);
+}
+
+.search-text.yellow {
+    color: #ffc837;
+}
+
+.search-img.yellow {
+    background-color: #ffc837;
+    width: calc((var(--this-width) + var(--this-height)) / 63.2820513);
+    height: calc((var(--this-width) + var(--this-height)) / 63.2820513);
+    top: calc((var(--this-width) + var(--this-height)) / 411.333333);
+}
+
+.searchInstruction {
+    font-family: 'Sarabun';
+    font-style: normal;
+    font-weight: 400;
+    font-size: calc((var(--this-width) + var(--this-height)) / 56.0909091);
+}
+
+.canvasContainer {
+    display: flex;
+    height: 60%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.canvasContainerInGame {
+    display: flex;
+    height: 65%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.menuBtnContainer {
+    display: flex;
+    flex-direction: column;
+    gap: calc((var(--this-width) + var(--this-height)) / 77.125);
+}
+
+.rowBtnContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: calc((var(--this-width) + var(--this-height)) / 3.88050314);
+}
+
+.rowSingleBtnContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#myCanvas {
+    width: calc((var(--this-width) + var(--this-height)) / 3.7224736);
+    height: calc((var(--this-width) + var(--this-height)) / 3.7224736);
+}
+

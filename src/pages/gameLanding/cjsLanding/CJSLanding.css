@@ -1,9 +1,9 @@
-#SSLandingHeader {
+#CJSLandingHeader {
     height: 14.22vh;
     /* height: calc(var(--vh, 1vh) * 14.22); */
 }
 
-#SSLandingBody {
+#CJSLandingBody {
     height: 85.78vh;
     /* height: calc(var(--vh, 1vh) * 85.78); */
     display: flex;
@@ -12,14 +12,16 @@
     justify-content: center;
 }
 
-.SSLandingProgressBar {
+.CJSLandingProgressBar {
     height: 10%;
 }
 
-.SSLandingWindow {
+.CJSLandingWindow {
     height: 60%;
+    display: flex;
+    align-items: center;
 }
 
-.SSLandingEnterButton {
+.CJSLandingEnterButton {
     height: 20%;
 }

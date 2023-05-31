@@ -1,0 +1,162 @@
+#GNGInstructionHeader {
+    height: 14.22vh;
+    // height: calc(var(--vh, 1vh) * 14.22);
+}
+
+#GNGInstructionBody {
+    height: 85.78vh;
+    // height: calc(var(--vh, 1vh) * 85.78);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.GNGInstructionBodyProgressBar {
+    height: 10%;
+}
+
+.GNGInstructionWindow {
+    height: 60%;
+}
+
+.GNGInstructionEnterButton {
+    height: 20%;
+}
+
+.TokBtnContainerInstruction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    position: absolute;
+    width: calc(var(--this-sum) / 3.55);
+    height: calc(var(--outer-button) + calc((var(--this-height) + var(--this-width)) / 24.68));
+    padding: 
+        calc((var(--this-width) + var(--this-height)) / 77.125)
+        calc((var(--this-width) + var(--this-height)) / 102.833333) 
+        calc((var(--this-width) + var(--this-height)) / 77.125) 
+        calc((var(--this-width) + var(--this-height)) / 102.833333);
+    left: 0px;
+    bottom: calc((var(--this-width) + var(--this-height)) / 4.32982456);
+    background-color: #FFFFFF;
+    border-radius: calc((var(--this-width) + var(--this-height)) / 154.25);
+}
+
+button#TokButtonInstruction {
+    border: 0;
+    width: var(--inner-button);
+    height: var(--inner-button);
+    max-width: var(--inner-button);
+    max-height: var(--inner-button);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    -webkitborder-radius: 50%;
+    top: calc(50% - max(0px, calc(var(--outer-button)/2)));
+    left: calc(50% - var(--inner-button)/2);
+    background: #fff;
+    box-shadow: 
+            0
+            calc((var(--this-width) + var(--this-height)) / 308.5)
+            calc((var(--this-width) + var(--this-height)) / 308.5)
+            rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+button#TokButtonInstruction::before {
+    content: "";
+    width: var(--outer-button);
+    height: var(--outer-button);
+    max-width: var(--outer-button);
+    max-height: var(--outer-button);
+    border: 0px solid rgb(255, 255, 255);
+    border-radius: inherit;
+    position: absolute;
+    opacity: 1;
+    transform: translateZ(-1px);
+    background: #E5E5E5;
+    box-shadow: 
+            0
+            calc((var(--this-width) + var(--this-height)) / 308.5)
+            calc((var(--this-width) + var(--this-height)) / 308.5)
+            rgba(0, 0, 0, 0.75);
+}
+
+button#TokButtonInstruction.clicked {
+    box-shadow: 
+            calc((var(--this-width) + var(--this-height)) / -1234)
+            calc((var(--this-width) + var(--this-height)) / -1234)
+            calc((var(--this-width) + var(--this-height)) / 246.8)
+            rgba(255, 255, 255, 0.1),
+            calc((var(--this-width) + var(--this-height)) / 1234)
+            calc((var(--this-width) + var(--this-height)) / 1234)
+            calc((var(--this-width) + var(--this-height)) / 246.8)
+            rgba(0, 0, 0, 0.1);
+}
+
+button#TokButtonInstruction.green::before {
+    background: var(--go-color);
+}
+
+button#TokButtonInstruction.red::before {
+    background: var(--nogo-color);
+}
+
+#TokButton.go-flash {
+    animation: flashclick 1s infinite;
+}
+
+#TokButton.go-flash::before {
+    animation: goflash 1s infinite;
+}
+
+#TokButton.nogo-flash {
+    color: black;
+}
+
+#TokButton.nogo-flash::before {
+    animation: nogoflash 1s infinite;
+}
+
+@keyframes goflash {
+    0% {
+        background-color: var(--go-color);
+    }
+
+    50% {
+        background-color: var(--go-color);
+    }
+
+    51% {
+        background-color: #e5e5e5;
+    }
+
+    100% {
+        background-color: #e5e5e5;
+    }
+}
+
+@keyframes nogoflash {
+    0% {
+        background-color: var(--nogo-color);
+    }
+
+    50% {
+        background-color: var(--nogo-color);
+    }
+
+    51% {
+        background-color: #e5e5e5;
+    }
+
+    100% {
+        background-color: #e5e5e5;
+    }
+}
+
+.onHide {
+    display: none;
+}

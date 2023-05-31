@@ -1,9 +1,9 @@
-#SSLandingHeader {
+#GNGGameHeader {
     height: 14.22vh;
     /* height: calc(var(--vh, 1vh) * 14.22); */
 }
 
-#SSLandingBody {
+#GNGGameBody {
     height: 85.78vh;
     /* height: calc(var(--vh, 1vh) * 85.78); */
     display: flex;
@@ -12,14 +12,14 @@
     justify-content: center;
 }
 
-.SSLandingProgressBar {
+.GNGGameBodyProgressBar {
     height: 10%;
 }
 
-.SSLandingWindow {
+.GNGGameWindow {
     height: 60%;
 }
 
-.SSLandingEnterButton {
+.GNGGameEnterButton {
     height: 20%;
 }

@@ -1,23 +1,24 @@
-import React from 'react'
-import './SSLanding.css'
+import React, { useEffect } from 'react'
+import './GNGLanding.scss'
 import BreadCrumb from '../../../components/breadcrumbs/breadCrumb'
-import SSWindow from '../../.././components/gameWindow/ssWindow/SSWindow'
+import GNGWindow from '../../../components/gameWindow/gngWindow/GNGWindow'
 import EnterButtons from '../../.././components/enterButtons/EnterButtons'
 import RotateAlert from '../../../components/rotateAlert/RotateAlert'
 
-function SSLanding() {
+let alwaysFlash = 'always-flash';
+function GNGLanding() {
   return (
     <div className='container-fluid'>
         <div className='row'>
             <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
               {<BreadCrumb />}
             </div>
-            <div id='SSLandingBody'>
-              <div className="SSLandingProgressBar"></div>
-              <div className="SSLandingWindow">
-                {<SSWindow />}
+            <div id='GNGLandingBody'>
+              <div className="GNGLandingProgressBar"></div>
+              <div className="GNGLandingWindow">
+                {<GNGWindow alwaysFlash={alwaysFlash}/>}
               </div>
-              <div className="SSLandingEnterButton">
+              <div className="GNGLandingEnterButton">
                 {<EnterButtons />}
               </div>
             </div>
@@ -27,4 +28,4 @@ function SSLanding() {
   )
 }
 
-export default SSLanding
+export default GNGLanding

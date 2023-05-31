@@ -1,16 +1,21 @@
 #LandingPageHeader {
     height: 14.22vh;
-    height: calc(var(--vh, 1vh) * 14.22);
+    /* height: calc(var(--vh, 1vh) * 14.22); */
 }
 
 #LandingPageBody {
     height: 85.78vh;
+<<<<<<< Updated upstream
     height: calc(var(--vh, 1vh) * 85.78);
+    padding: calc(var(--this-sum) / 123.4);
+=======
+    /* height: calc(var(--vh, 1vh) * 85.78); */
     padding: 
         0
         calc(var(--this-width) / 17.73)
         0
         calc(var(--this-width) / 17.73);
+>>>>>>> Stashed changes
     padding-top: unset;
 }
 
