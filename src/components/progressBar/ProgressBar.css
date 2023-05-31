@@ -27,3 +27,61 @@
         calc(var(--this-sum) / 246.8) 
         rgba(0, 0, 0, 0.25);
 }
+
+@keyframes progressbar-countdown {
+    0% {
+        width: 1%;
+        background: #D2D2D2;
+    }
+
+    100% {
+        width: 100%;
+        background: #D2D2D2;
+    }
+}
+
+.progressbar {
+    position: absolute;
+    display: block;
+    width: calc((var(--this-width) + var(--this-height)) / 4.11333333);
+    height: calc((var(--this-width) + var(--this-height)) / 41.1333333);
+    border: calc((var(--this-width) + var(--this-height)) / 1234) solid rgba(196, 196, 196, 0.56);
+    border-radius: calc((var(--this-width) + var(--this-height)) / 123.4);
+    box-shadow: 
+        0
+        calc((var(--this-width) + var(--this-height)) / 617)
+        calc((var(--this-width) + var(--this-height)) / 308.5)
+        calc((var(--this-width) + var(--this-height)) / 617)
+        rgba(0, 0, 0, 0.25);
+    background: #FFFFFF;
+    z-index: 1;
+}
+
+.progressbar .inner {
+    height: 100%;
+    width: 80%;
+    border-radius: calc((var(--this-width) + var(--this-height)) / 154.25);
+    box-shadow: 
+        0
+        calc((var(--this-width) + var(--this-height)) / 308.5)
+        calc((var(--this-width) + var(--this-height)) / 246.8)
+        rgba(0, 0, 0, 0.25);
+    animation: progressbar-countdown;
+    /* Placeholder, this will be updated using javascript */
+    animation-duration: 4s;
+    /* We stop in the end */
+    animation-iteration-count: 1;
+    /* Stay on pause when the animation is finished finished */
+    animation-fill-mode: forwards;
+    /* We start paused, we start the animation using javascript */
+    animation-play-state: paused;
+    /* We want a linear animation, ease-out is standard */
+    animation-timing-function: linear;
+}
+
+.progressBarContainer {
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

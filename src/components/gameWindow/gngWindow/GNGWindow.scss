@@ -1,0 +1,118 @@
+:root {
+    --go-color: #26A445;
+    --nogo-color: #E52D27;
+    --rest-color: #FFFFFF;
+    --inner-button: calc((var(--this-height) + var(--this-width)) / 6.35263835);
+    --outer-button: calc((var(--this-height) + var(--this-width)) / 4.76447876);
+    --inner-button-tablet: calc(var(--this-height) / 5.49479167);
+    --outer-button-tablet: calc(var(--this-height) / 4.12109375);
+}
+
+.tok-button-row {
+    height: 60%;
+}
+
+button#TokButton {
+    -webkit-tap-highlight-color: transparent;
+    border: 0;
+    width: var(--inner-button);
+    height: var(--inner-button);
+    max-width: var(--inner-button);
+    max-height: var(--inner-button);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    -webkitborder-radius: 50%;
+    position: absolute;
+    top: calc(50% - max(0px, calc(var(--outer-button)/2)));
+    left: calc(50% - var(--inner-button)/2);
+    background: var(--rest-color);
+    box-shadow: 
+            0
+            calc((var(--this-width) + var(--this-height)) / 308.5)
+            calc((var(--this-width) + var(--this-height)) / 308.5)
+            rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+button#TokButton::before {
+    content: "";
+    width: var(--outer-button);
+    height: var(--outer-button);
+    max-width: var(--outer-button);
+    max-height: var(--outer-button);
+    border: 0px solid rgb(255, 255, 255);
+    border-radius: inherit;
+    position: absolute;
+    opacity: 1;
+    transform: translateZ(-1px);
+    background: #E5E5E5;
+    box-shadow: 
+            0
+            calc((var(--this-width) + var(--this-height)) / 308.5)
+            calc((var(--this-width) + var(--this-height)) / 308.5)
+            rgba(0, 0, 0, 0.75);
+}
+
+button#TokButton.clicked {
+    box-shadow: 
+            calc((var(--this-width) + var(--this-height)) / -1234)
+            calc((var(--this-width) + var(--this-height)) / -1234)
+            calc((var(--this-width) + var(--this-height)) / 246.8)
+            rgba(255, 255, 255, 0.1),
+            calc((var(--this-width) + var(--this-height)) / 1234)
+            calc((var(--this-width) + var(--this-height)) / 1234)
+            calc((var(--this-width) + var(--this-height)) / 246.8)
+            rgba(0, 0, 0, 0.1);
+}
+
+button#TokButton.green::before {
+    background: var(--go-color);
+}
+
+button#TokButton.red::before {
+    background: var(--nogo-color);
+}
+
+.always-flash::before {
+    animation-name: auto-flash;
+    animation-duration: 1.25s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes auto-flash {
+    0% {
+        background-color: #e5e5e5;
+    }
+
+    25% {
+        background-color: #e5e5e5;
+    }
+
+    25.1% {
+        background-color: var(--go-color);
+    }
+
+    50% {
+        background-color: var(--go-color);
+    }
+
+    50.1% {
+        background-color: #e5e5e5;
+    }
+
+    75% {
+        background-color: #e5e5e5;
+    }
+
+    75.1% {
+        background-color: var(--nogo-color);
+    }
+
+    100% {
+        background-color: var(--nogo-color);
+    }
+}
+

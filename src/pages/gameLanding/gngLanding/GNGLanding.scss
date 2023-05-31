@@ -1,0 +1,25 @@
+#GNGLandingHeader {
+    height: 14.22vh;
+    // height: calc(var(--vh, 1vh) * 14.22);
+}
+
+#GNGLandingBody {
+    height: 85.78vh;
+    // height: calc(var(--vh, 1vh) * 85.78);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.GNGLandingProgressBar {
+    height: 10%;
+}
+
+.GNGLandingWindow {
+    height: 60%;
+}
+
+.GNGLandingEnterButton {
+    height: 20%;
+}
