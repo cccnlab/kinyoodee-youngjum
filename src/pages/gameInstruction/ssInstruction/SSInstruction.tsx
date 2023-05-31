@@ -652,7 +652,9 @@ function SSInstruction() {
         </div>
       ) : null}
       <div className="row">
-        <div id="SSInstructionHeader">{<BreadCrumb />}</div>
+        <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+            {<BreadCrumb />}
+        </div>
         <div id="SSInstructionBody">
           <div className="SSInstructionBodyProgressBar">
             {<ProgressBar progressValue={progressValue} trialNumber={100} />}

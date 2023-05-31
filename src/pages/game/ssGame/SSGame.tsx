@@ -417,6 +417,7 @@ function seqGenerator() {
       currAns = [];
       cueStartTime = [];
       cueEndTime = [];
+      answerTimePerTrial = [];
       
       timeoutList.push(
           setTimeout(function () {
