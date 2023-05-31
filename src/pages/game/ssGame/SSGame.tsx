@@ -21,10 +21,6 @@ let progressBarElement: HTMLProgressElement;
 //Test parameters
 const flashDuration: number = 250;
 const flashInterval: number = 750;
-<<<<<<< Updated upstream
-const trialNumber: number = 2; // to edit
-=======
->>>>>>> Stashed changes
 const initialSpan: number = 2;
 const probeNumber: number = 6;
 const allProbe: number[] = [1,2,3,4,5,6];
@@ -189,7 +185,6 @@ function SSGame(props) {
           cueData(currSeq, cueColor, cueBorderColor, cueStartTime, cueEndTime);
           probeData(probeNumber, allProbe, restColor, restBorderColor, probeShape, probeParams, radius, probeAngularPosition);
           answerData(currAns, answerTimePerTrial);
-          trialData(currSpan, cueDataResult, probeDataResult, answerDataResult);
           timeoutList.push(
               setTimeout(function() {
                   $('.cirButton').removeClass('clicked');
@@ -559,12 +554,6 @@ function seqGenerator() {
   function Done() {
       setIsItDone(true);
       let end = endTime();
-<<<<<<< Updated upstream
-      score = sumScores;
-      scoringData(trialNumber, spanMultiplier, score);
-      metricData(trialNumber, summaryCorrect, spanInCorrectAns, enterStruggleTimeCount);
-      postEntry(trialDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
-=======
       score = total;
       trialDataResult = trialData(allSpan, cueDataResult, probeDataResult, answerDataResult);
       scoringDataResult = scoringData(trialNumber, spanMultiplier, score);
@@ -577,7 +566,6 @@ function seqGenerator() {
     //         .catch(function (error) {
     //             console.log('error')
     //         });
->>>>>>> Stashed changes
   }
 
   function cueData(currSeq: string | any[], cueColor: string, cueBorderColor: string, cueStartTime: any[], cueEndTime: any[]){
@@ -637,16 +625,12 @@ function seqGenerator() {
       return answerDataResult;
   }
 
-  function trialData(currSpan: number, cueDataResult: any[], probeDataResult: any[], answerDataResult: any[]){
+  function trialData(allSpan: number[], cueDataResult: any[], probeDataResult: any[], answerDataResult: any[]){
       
-<<<<<<< Updated upstream
-      for (let i = 0; i < 1; i++) {
-=======
       for (let i = 0; i < trialNumber; i++) {
->>>>>>> Stashed changes
           let obj_to_append;
           obj_to_append = {
-              "spanSize" : currSpan,
+              "spanSize" : allSpan[i],
               "cueData" : cueDataResult[i],
               "probeData" : probeDataResult[i],
               "answerData" : answerDataResult[i],
