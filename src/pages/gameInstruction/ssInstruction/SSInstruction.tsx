@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useEffect, useRef, useState } from "react";
 import "./SSInstruction.scss";
 import AppHeader from "../../../components/appHeader/AppHeader";
@@ -14,6 +15,24 @@ import handClick from "../../../assets/png/handClick.png";
 import $ from "jquery";
 import { useNavigate } from "react-router-dom";
 import RotateAlert from "../../../components/rotateAlert/RotateAlert";
+=======
+import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import './SSInstruction.scss'
+import BreadCrumb from '../../../components/breadcrumbs/breadCrumb';
+import SSWindow from '../../../components/gameWindow/ssWindow/SSWindow';
+import ProgressBar from '../../../components/progressBar/ProgressBar';
+import useSound from 'use-sound';
+import clickSoundSrc from '../../../assets/sound/click.mp3'
+import combo2SoundSrc from '../../../assets/sound/combo2.mp3';
+import losingSoundSrc from '../../../assets/sound/losingStreak.mp3';
+import instructionProgressbar from '../../../assets/png/progressBar.png';
+import instructionPerson from '../../../assets/png/instructionPerson.png';
+import instructionFinished from '../../../assets/png/instructionFinished.png';
+import handClick from '../../../assets/png/handClick.png';
+import $ from 'jquery';
+import RotateAlert from '../../../components/rotateAlert/RotateAlert';
+>>>>>>> Stashed changes
 
 let progressBarElement: HTMLProgressElement;
 
@@ -440,6 +459,7 @@ function SSInstruction() {
                 id="instructionProgressbar"
               ></img>
             </div>
+<<<<<<< Updated upstream
             <div
               className={
                 "instructionContainer" + (tutorialStep === 9 ? " centered" : "")
@@ -646,6 +666,20 @@ function SSInstruction() {
                     )}
                   </div>
                 </div>
+=======
+        </div>
+        : null}
+        <div className='row'>
+            <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+              {<BreadCrumb />}
+            </div>
+            <div id='SSInstructionBody'>
+            <div className="SSInstructionBodyProgressBar">
+              {<ProgressBar progressValue={progressValue} trialNumber={100}/>}
+            </div>
+              <div className="SSInstructionWindow">
+                {<SSWindow checkSeq={checkSeq}/>}
+>>>>>>> Stashed changes
               </div>
             </div>
           </div>

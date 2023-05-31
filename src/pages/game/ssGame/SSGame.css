@@ -1,11 +1,11 @@
 #SSGameHeader {
     height: 14.22vh;
-    height: calc(var(--vh, 1vh) * 14.22);
+    /* height: calc(var(--vh, 1vh) * 14.22); */
 }
 
 #SSGameBody {
     height: 85.78vh;
-    height: calc(var(--vh, 1vh) * 85.78);
+    /* height: calc(var(--vh, 1vh) * 85.78); */
     display: flex;
     flex-direction: column;
     align-items: center;

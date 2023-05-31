@@ -1,11 +1,11 @@
 #SSInstructionHeader {
     height: 14.22vh;
-    height: calc(var(--vh, 1vh) * 14.22);
+    // height: calc(var(--vh, 1vh) * 14.22);
 }
 
 #SSInstructionBody {
     height: 85.78vh;
-    height: calc(var(--vh, 1vh) * 85.78);
+    // height: calc(var(--vh, 1vh) * 85.78);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,6 +19,7 @@
 .SSInstructionWindow {
     height: 60%;
 }
+
 .SSInstructionEnterButton {
     height: 20%;
 }
@@ -134,7 +135,7 @@
     justify-content: center;
     flex-direction: row;
     position: relative;
-    height: calc(var(--outer-button) + calc(var(--this-sum) / 24.68));
+    height: calc(var(--outer-button) + calc(var(--this-sum) / 18));
     min-width: calc(var(--this-sum) / 3.65);
     padding: 
     calc(var(--this-sum) / 77.125)
@@ -276,6 +277,7 @@
 .tutorial {
     background: rgba(0, 0, 0, 0.65);
     position: absolute;
+    // height: calc(var(--vh, 1vh) * 100);
     left: 0%;
     right: 0%;
     top: 0%;
@@ -339,22 +341,6 @@
     }
 }
 
-.canvasContainerInstruction {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    position: absolute;
-    width: fit-content;
-    height: fit-content;
-    min-width: calc(var(--this-sum) / 3.43);
-    padding: calc(var(--this-sum) / 102.83);
-    left: 0;
-    bottom: calc(var(--this-sum) / 7.05);
-    background-color: #FFFFFF;
-    border-radius: calc(var(--this-sum) / 154.25);
-}
-
 .instructionSearchInstruction {
     font-style: normal;
     font-weight: 400;
@@ -366,26 +352,6 @@
     height: calc(var(--this-sum) / 3.72);
 }
 
-.btnContainerInstruction {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: row;
-    position: absolute;
-    width: fit-content;
-    height: fit-content;
-    min-width: calc(var(--this-sum) / 3.43);
-    padding: 
-        calc(var(--this-sum) / 77.125)
-        calc(var(--this-sum) / 102.83)
-        calc(var(--this-sum) / 77.125)
-        calc(var(--this-sum) / 102.83);
-    left: 0;
-    bottom: calc(var(--this-sum) / 3.63);
-    background-color: #FFFFFF;
-    border-radius: alc(var(--this-sum) / 154.25);
-}
-
 .progressBarContainerInstruction {
     display: flex;
     align-items: center;
@@ -395,11 +361,10 @@
     height: fit-content;
     width: calc(var(--this-sum) / 3.55);
     padding: calc(var(--this-sum) / 77.125);
-    top: calc(var(--this-sum) / 10.28);
+    top: calc(var(--this-sum) / 22.03);
     background-color: #FFFFFF;
     border-radius: calc(var(--this-sum) / 154.25);
 }
-
 
 #instructionProgressbar {
     width: calc(var(--this-sum) / 3.80);
@@ -471,38 +436,4 @@
     color: #6C6C6C;
 }
 
-@media (orientation: landscape) {
-    .card {
-        position: unset;
-    }
-
-    .progressBarContainer {
-        position: absolute;
-        top: calc(var(--this-sum) / 10.28);
-    }
-
-    .progressBarContainerInstruction {
-        position: absolute;
-        top: calc(var(--this-sum) / 9.14);
-    }
-
-    .canvasContainerInstruction {
-        z-index: -1;
-    }
-
-    .searchInstruction {
-        position: absolute;
-        left: calc(var(--this-sum) / 16.45);
-        top: calc(var(--this-sum) / 4.66);
-    }
-    
-    #myCanvas {
-        position: absolute;
-        top: calc(var(--this-sum) / 4.11);
-    }
-
-    .canvasContainer {
-        height: 75%;
-    }
-}
 

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SSGame.css';
-import AppHeader from '../../../components/appHeader/AppHeader';
+import BreadCrumb from '../../../components/breadcrumbs/breadCrumb';
 import SSWindow from '../../../components/gameWindow/ssWindow/SSWindow';
 import ProgressBar from '../../../components/progressBar/ProgressBar';
 import ScoreSummaryOverlay from '../../../components/scoreSummaryOverlay/ScoreSummaryOverlay';
@@ -10,15 +10,21 @@ import clickSoundSrc from '../../../assets/sound/click.mp3'
 import combo2SoundSrc from '../../../assets/sound/combo2.mp3';
 import losingSoundSrc from '../../../assets/sound/losingStreak.mp3';
 import $ from 'jquery';
-import moment from 'moment';
 import RotateAlert from '../../../components/rotateAlert/RotateAlert';
+import { Shuffle } from '../../../scripts/shuffle';
+import { samplingFromList } from '../../../uitls/main';
+import moment from 'moment';
+import axios from 'axios';
 
 let progressBarElement: HTMLProgressElement;
 
 //Test parameters
 const flashDuration: number = 250;
 const flashInterval: number = 750;
+<<<<<<< Updated upstream
 const trialNumber: number = 2; // to edit
+=======
+>>>>>>> Stashed changes
 const initialSpan: number = 2;
 const probeNumber: number = 6;
 const allProbe: number[] = [1,2,3,4,5,6];
@@ -35,6 +41,7 @@ const maxFailStreakCount: number = 2;
 const maxFailCount: number = 3; 
 
 // Initaial values
+let trialNumber = 20;
 let currSpan = initialSpan;
 let currTrial: number = 0;
 let allSpan: number[] = [];
@@ -55,11 +62,15 @@ let allReactionTime: string[]  = [];
 let reactionTime: number[] = [];
 let allReactionTrial: number[] = [];
 let answerTimePerTrial: any[] = [];
+let hitRt: number[] = [];
+let sumHitRt;
+let avgHitRt;
 let latestIndex: number = 0;
 let scorePerTrial: number[] = [];
 let spanMultiplier: number = 1000;
 let summaryCorrect: number = 0;
 let sumScores: number  = 0;
+let total: number = 0;
 let score: number;
 let trialStruct: any[] = [];
 let cueStartTime: any[] = [];
@@ -73,9 +84,10 @@ let trialDataResult: any[] = [];
 let gameLogicSchemeResult: { game: string; schemeName: string; version: number; variant: string; parameters: { trialNumber: { value: any; unit: null; description: string }; flashDuration: { value: any; unit: string; description: string }; flashInterval: { value: any; unit: string; description: string }; initialSpan: { value: any; unit: null; description: string }; probeNumber: { value: any; unit: null; description: string }; probeAngularPosition: { value: any; unit: string; description: string }; rampingCorrectCount: { value: any; unit: null; description: string }; maxFailStreakCount: { value: any; unit: null; description: string }; maxFailCount: { value: any; unit: null; description: string } }; description: string };
 let scoringDataResult: any[] = [];
 let metricDataResult: any[] = [];
+let directionMode: string[] = [];
 let postEntryResult;
 
-function SSGame() {
+function SSGame(props) {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLButtonElement>(null);
   const [clickSound] = useSound(clickSoundSrc);
@@ -86,18 +98,17 @@ function SSGame() {
 
   useEffect(() => {
       initiateData();
-      gameLogicScheme(trialNumber, flashDuration, flashInterval, initialSpan, probeNumber, probeAngularPosition, rampingCorrectCount, maxFailStreakCount, maxFailCount);
+      gameLogicSchemeResult = gameLogicScheme(trialNumber, flashDuration, flashInterval, initialSpan, probeNumber, probeAngularPosition, rampingCorrectCount, maxFailStreakCount, maxFailCount);
       progressBarElement = document.getElementById("progressBar") as HTMLProgressElement;
       seqGenerator();
-      
+    
       return () => {
-        refreshPage();
         timeoutList.forEach(tm => {
             clearTimeout(tm);
         })
       };
   }, [])
-
+  
   useEffect(() => {
       if (inputRef.current != null) {
           inputRef.current.focus();
@@ -115,49 +126,61 @@ function SSGame() {
       if (event.currentTarget.classList.contains('1')) {
           currAns.push(1);
           ($('#cirButton1').addClass('clicked'));
+          ($('#border1').addClass('clicked'));
           timeoutList.push(
               setTimeout(function() {
-                  $('#cirButton1').removeClass('clicked') 
+                  $('#cirButton1').removeClass('clicked');
+                  $('#border1').removeClass('clicked');
               }, 150)
           )
       } else if (event.currentTarget.classList.contains('2')) {
           currAns.push(2);
           ($('#cirButton2').addClass('clicked'));
+          ($('#border2').addClass('clicked'));
           timeoutList.push(
               setTimeout(function() {
-                  $('#cirButton2').removeClass('clicked') 
+                  $('#cirButton2').removeClass('clicked');
+                  $('#border2').removeClass('clicked');
               }, 150)
           )
       } else if (event.currentTarget.classList.contains('3')) {
           currAns.push(3);
           ($('#cirButton3').addClass('clicked'));
+          ($('#border3').addClass('clicked'));
           timeoutList.push(
               setTimeout(function() {
-                  $('#cirButton3').removeClass('clicked') 
+                  $('#cirButton3').removeClass('clicked')
+                  $('#border3').removeClass('clicked');
               }, 150)
           )
       } else if (event.currentTarget.classList.contains('4')) { 
           currAns.push(4);
           ($('#cirButton4').addClass('clicked'));
+          ($('#border4').addClass('clicked'));
           timeoutList.push(
               setTimeout(function() {
-                  $('#cirButton4').removeClass('clicked') 
+                  $('#cirButton4').removeClass('clicked');
+                  $('#border4').removeClass('clicked');
               }, 150)
           )
       } else if (event.currentTarget.classList.contains('5')) {
           currAns.push(5);
           ($('#cirButton5').addClass('clicked'));
+          ($('#border5').addClass('clicked'));
           timeoutList.push(
               setTimeout(function() {
-                  $('#cirButton5').removeClass('clicked') 
+                  $('#cirButton5').removeClass('clicked');
+                  $('#border5').removeClass('clicked');
               }, 150)
           )
       } else {
           currAns.push(6);
           ($('#cirButton6').addClass('clicked'));
+          ($('#border6').addClass('clicked'));
           timeoutList.push(
               setTimeout(function() {
-                  $('#cirButton6').removeClass('clicked') 
+                  $('#cirButton6').removeClass('clicked');
+                  $('#border6').removeClass('clicked');
               }, 150)
           )
       }
@@ -180,7 +203,7 @@ function SSGame() {
           
           const equalCheck = (currAns: any[], currSeq: string | any[]) => 
               currAns.length === currSeq.length && currAns.every((value, index) => value === currSeq[index]);
-              
+
           if (equalCheck(currAns, currSeq)) {
               $('#goSignal').html("ถูก");
               setProgressValue(progressValue + 1);
@@ -340,55 +363,59 @@ function SSGame() {
       return gameLogicSchemeResult;
   }
 
-  function seqGenerator() {
+function seqGenerator() {
       if (currTrial !== trialNumber) {
           allSpan.push(currSpan);
           if (genSeq.length === 0) {
+              // original random method (allowed repetition number)
               for (let i = 0; i < currSpan; i++) {
-                  let thisSeq = Math.floor(Math.random() * probeNumber) + 1;
-                  genSeq.push(thisSeq);
+                let thisSeq = Math.floor(Math.random() * probeNumber) + 1;
+                genSeq.push(thisSeq);
               }
+              // new random method (no repetition number)
+              // let trialSeqGenerator: number[] = samplingFromList(allProbe, currSpan, false);
+              // genSeq = trialSeqGenerator;
           }
           timeIntervalPerTrial();
       } 
   }
 
   function timeIntervalPerTrial() {
-      $('.cirButton').addClass('hoverDisabled');
+    $('.cirButton').addClass('hoverDisabled');
 
-      timeoutList.push(
-          setTimeout(function() {
-              $('#goSignal').html("");
-              $('#goSignal').html("3");
-          }, 100) 
-      )
+    timeoutList.push(
+        setTimeout(function() {
+            $('#goSignal').html("");
+            $('#goSignal').html("3");
+        }, 100) 
+    )
 
-      timeoutList.push(
-          setTimeout(function() {
-              $('#goSignal').html("");
-              $('#goSignal').html("2");
-          }, 1100) 
-      )
+    timeoutList.push(
+        setTimeout(function() {
+            $('#goSignal').html("");
+            $('#goSignal').html("2");
+        }, 1100)
+    )
 
-      timeoutList.push(
-          setTimeout(function() {
-              $('#goSignal').html("");
-              $('#goSignal').html("1");
-          }, 2100) 
-      )
+    timeoutList.push(
+        setTimeout(function() {
+            $('#goSignal').html("");
+            $('#goSignal').html("1");
+        }, 2100) 
+    )
 
-      timeoutList.push(
-          setTimeout(function() {
-              $('#goSignal').html("");
-          }, 3100) 
-      )
+    timeoutList.push(
+        setTimeout(function() {
+            $('#goSignal').html("");
+        }, 3100) 
+    )
 
-      timeoutList.push(
-          setTimeout(function() {
-              popCircleButton();
-          }, 4100) 
-      )
-  }
+    timeoutList.push(
+        setTimeout(function() {
+            popCircleButton();
+        }, 4100) 
+    )
+}
   
   function popCircleButton(popTime = flashDuration, intervalTime = flashInterval, locationPop = allSeq) {
       isTest = false;
@@ -398,6 +425,7 @@ function SSGame() {
       
       timeoutList.push(
           setTimeout(function () {
+              $('#goSignal').html("");
               $('#goSignal').html("ตาคุณ");
               startTime = timeStart();
               $('.cirButton').removeClass('hoverDisabled');
@@ -531,10 +559,25 @@ function SSGame() {
   function Done() {
       setIsItDone(true);
       let end = endTime();
+<<<<<<< Updated upstream
       score = sumScores;
       scoringData(trialNumber, spanMultiplier, score);
       metricData(trialNumber, summaryCorrect, spanInCorrectAns, enterStruggleTimeCount);
       postEntry(trialDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
+=======
+      score = total;
+      trialDataResult = trialData(allSpan, cueDataResult, probeDataResult, answerDataResult);
+      scoringDataResult = scoringData(trialNumber, spanMultiplier, score);
+      metricDataResult = metricData(trialNumber, summaryCorrect, spanInCorrectAns, enterStruggleTimeCount);
+      postEntryResult = postEntry(trialDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
+    //   axios.post('https://hwsrv-1063269.hostwindsdns.com/exercise-api-hard/spatial-span', postEntryResult)
+    //         .then(function (postEntryResult) {
+    //             console.log(postEntryResult)
+    //         })
+    //         .catch(function (error) {
+    //             console.log('error')
+    //         });
+>>>>>>> Stashed changes
   }
 
   function cueData(currSeq: string | any[], cueColor: string, cueBorderColor: string, cueStartTime: any[], cueEndTime: any[]){
@@ -596,7 +639,11 @@ function SSGame() {
 
   function trialData(currSpan: number, cueDataResult: any[], probeDataResult: any[], answerDataResult: any[]){
       
+<<<<<<< Updated upstream
       for (let i = 0; i < 1; i++) {
+=======
+      for (let i = 0; i < trialNumber; i++) {
+>>>>>>> Stashed changes
           let obj_to_append;
           obj_to_append = {
               "spanSize" : currSpan,
@@ -667,8 +714,10 @@ function SSGame() {
 
   function postEntry(trialDataResult: any[], gameLogicSchemeResult: { game: string; schemeName: string; version: number; variant: string; parameters: { trialNumber: { value: any; unit: null; description: string }; flashDuration: { value: any; unit: string; description: string }; flashInterval: { value: any; unit: string; description: string }; initialSpan: { value: any; unit: null; description: string }; probeNumber: { value: any; unit: null; description: string }; probeAngularPosition: { value: any; unit: string; description: string }; rampingCorrectCount: { value: any; unit: null; description: string }; maxFailStreakCount: { value: any; unit: null; description: string }; maxFailCount: { value: any; unit: null; description: string } }; description: string }, scoringDataResult: any[], metricDataResult: any[]){
       postEntryResult = {
-          "profileID" : '8b332a3a-434c-4c90-b800-00002e031cd0',
-          "entryInformation" : {
+        //   "userId" : props.userId,
+        //   "userPhone" : props.userPhone,
+          "profileID" : "TOK",
+          "data" : {
               "rawData" : {
                   "trialData" : trialDataResult,
                   "description" : 'all important data per trial'
@@ -678,8 +727,6 @@ function SSGame() {
               "metricData" : metricDataResult
           }
       }
-      console.log(postEntryResult);
-      console.log(JSON.stringify(postEntryResult));
       return postEntryResult;
   }
 
@@ -691,16 +738,32 @@ function SSGame() {
               scorePerTrial.push(allSpan[correctIndex] * spanMultiplier);
               summaryCorrect++;
               spanInCorrectAns.push(allSpan[correctIndex]);
+              hitRt.push(allReactionTrial[correctIndex]);
           } else if (checkAns[correctIndex] === 0 && checkAns[correctIndex + 1] === 1) {
               summaryCorrect--;
-          }
+        }
+      }
+
+      if (hitRt.length !== 0){
+
+          sumHitRt = hitRt.reduce((sum, time) => {
+            return sum + time;
+            });
+      }
+
+        avgHitRt = sumHitRt / 1000 / hitRt.length;
+      
+      if (scorePerTrial.length !== 0){
+          sumScores = scorePerTrial.reduce((sum, score) => {
+            return sum + score;
+          });
+      } else {
+        scorePerTrial.push(0);
       }
       
-      sumScores = scorePerTrial.reduce((sum, score) => {
-        return sum + score;
-      });
-  
-      return sumScores;
+      total = Math.max(10000, Math.round((sumScores)));
+
+      return total;
   }
   
   function timeStart() : number{
@@ -709,7 +772,7 @@ function SSGame() {
   }
 
   function refreshPage(){
-      window.location.reload();
+    window.location.reload();
   } 
 
   function backToLandingPage() {
@@ -719,8 +782,8 @@ function SSGame() {
   return (
     <div className='container-fluid'>
         <div className='row'>
-            <div id='SSGameHeader' className='col'>
-              {<AppHeader />}
+            <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+              {<BreadCrumb />}
             </div>
             <div id='SSGameBody' className='col'>
             <div className="SSGameBodyProgressBar">
@@ -734,7 +797,7 @@ function SSGame() {
         </div>
         {isItDone ? 
         <div>
-            {<ScoreSummaryOverlay sumScores={sumScores} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
+            {<ScoreSummaryOverlay sumScores={total} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
         </div>
         : null}
         {<RotateAlert />}
@@ -753,5 +816,6 @@ function thisTime() {
   let thisTime = moment().format('YYYY-MM-DDTkk:mm:ss.SSSSSS');
   return thisTime;
 }
+
 
 
