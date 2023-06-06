@@ -14,6 +14,9 @@ import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
 import { getDataFromLocalStorage } from './uitls/offline';
 
 function App() {
+  const [userId, setUserId] = useState("XXXX");
+  const [userPhone, setUserPhone] = useState("XXXX");
+
   useEffect(() => {
     const disablePinchZoom = (e) => {
       if (e.touches.length > 1) {
@@ -21,6 +24,7 @@ function App() {
       }
     }
     document.addEventListener("touchmove", disablePinchZoom, { passive: false })
+    getUserIdFromQuery();
     documentHeightWidth();
     window.addEventListener('resize', documentHeightWidth);
     window.addEventListener('orientationchange', documentHeightWidth);
@@ -32,9 +36,9 @@ function App() {
       setUserPhone(phone);
       // window.location.replace(window.location.origin + "#/landing");
     } else {
-      if (window.location.href === "https://cccnlab.co/brain-exercises-hard/"){
+      if (window.location.href === "https://cccnlab.co/kinyoodee-youngjum/"){
       } else {
-        window.location.replace("https://cccnlab.co/brain-exercises-hard/");
+        window.location.replace("https://cccnlab.co/kinyoodee-youngjum/");
       }
     }
   }, [])
@@ -53,8 +57,12 @@ function App() {
     document.documentElement.style.setProperty('--this-sum', calSum + 'px');
     document.documentElement.style.setProperty('--vh', vh + 'px');
   }
-  const [userId, setUserId] = useState("XXXX");
-  const [userPhone, setUserPhone] = useState("XXXX");
+
+  function getUserIdFromQuery() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const getUserId = urlParams.get('userId');
+    console.log(getUserId)
+  }
   return (
     <>
       <Router>
