@@ -1,27 +1,24 @@
 {
   "files": {
-    "main.css": "/kinyoodee-youngjum/static/css/main.5ff4098d.css",
-    "main.js": "/kinyoodee-youngjum/static/js/main.75fe5536.js",
+    "main.css": "/kinyoodee-youngjum/static/css/main.5f4ee081.css",
+    "main.js": "/kinyoodee-youngjum/static/js/main.55d2ff9b.js",
     "static/js/845.c26fdbcf.chunk.js": "/kinyoodee-youngjum/static/js/845.c26fdbcf.chunk.js",
     "static/js/787.5611f07e.chunk.js": "/kinyoodee-youngjum/static/js/787.5611f07e.chunk.js",
-    "static/media/combo1.mp3": "/kinyoodee-youngjum/static/media/combo1.1bc6ea7eed39c4f2c3b8.mp3",
     "static/media/combo2.mp3": "/kinyoodee-youngjum/static/media/combo2.dc4a26f58622d3a5a4c0.mp3",
-    "static/media/combo3.mp3": "/kinyoodee-youngjum/static/media/combo3.baee467a5476a005d616.mp3",
     "static/media/ss-img.png": "/kinyoodee-youngjum/static/media/ss-img.933229e186dcdd3ea7d4.png",
     "static/media/scoreBadge.png": "/kinyoodee-youngjum/static/media/scoreBadge.19ad617b855d5df93fd6.png",
-    "static/media/canvas.png": "/kinyoodee-youngjum/static/media/canvas.af9dd0d3d32af858101d.png",
     "static/media/click.mp3": "/kinyoodee-youngjum/static/media/click.bac13dc239761d7d5b08.mp3",
     "static/media/instructionFinished.png": "/kinyoodee-youngjum/static/media/instructionFinished.fed3583b2d80ff6a5f4b.png",
     "static/media/losingStreak.mp3": "/kinyoodee-youngjum/static/media/losingStreak.3e9f53afed48af7cc022.mp3",
     "static/media/rotate-phone.svg": "/kinyoodee-youngjum/static/media/rotate-phone.6172f756fbd62559e2be4c10385ec685.svg",
     "index.html": "/kinyoodee-youngjum/index.html",
-    "main.5ff4098d.css.map": "/kinyoodee-youngjum/static/css/main.5ff4098d.css.map",
-    "main.75fe5536.js.map": "/kinyoodee-youngjum/static/js/main.75fe5536.js.map",
+    "main.5f4ee081.css.map": "/kinyoodee-youngjum/static/css/main.5f4ee081.css.map",
+    "main.55d2ff9b.js.map": "/kinyoodee-youngjum/static/js/main.55d2ff9b.js.map",
     "845.c26fdbcf.chunk.js.map": "/kinyoodee-youngjum/static/js/845.c26fdbcf.chunk.js.map",
     "787.5611f07e.chunk.js.map": "/kinyoodee-youngjum/static/js/787.5611f07e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5ff4098d.css",
-    "static/js/main.75fe5536.js"
+    "static/css/main.5f4ee081.css",
+    "static/js/main.55d2ff9b.js"
   ]
 }
