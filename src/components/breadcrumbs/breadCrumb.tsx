@@ -7,7 +7,7 @@ import { getDataFromLocalStorage } from '../../uitls/offline';
 
 export default function BreadCrumb() {
   const [headerText, setHeaderText] = useState('');
-  const [gameButtonLink, setGameButtonLink] = useState('#/landing');
+  const [gameButtonLink, setGameButtonLink] = useState('#/');
   const [disableHomeButton, setDisableHomeButton] = useState('');
   const [disableGameButton, setDisableGameButton] = useState('');
   // const [hideUserId, setHideUserId] = useState(false);
@@ -18,6 +18,7 @@ export default function BreadCrumb() {
   let SSHeaderText = 'จำจด กดตาม';
   let CJSHeaderText = 'หากันจนเจอ';
   let GNGHeaderText = 'เขียวไป แดงหยุด';
+
   let pages = [
     { name: headerText, href: gameButtonLink, current: false },
   ]
