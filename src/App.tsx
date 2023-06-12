@@ -4,14 +4,14 @@ import LandingPage from './pages/landingPage/LandingPage';
 import SSLanding from './pages/gameLanding/ssLanding/SSLanding';
 import SSInstruction from './pages/gameInstruction/ssInstruction/SSInstruction';
 import SSGame from './pages/game/ssGame/SSGame';
-import CJSLanding from './pages/gameLanding/cjsLanding/CJSLanding';
-import CJSInstruction from './pages/gameInstruction/cjsInstruction/CJSInstruction';
-import CJSGame from './pages/game/cjsGame/CJSGame';
-import GNGLanding from './pages/gameLanding/gngLanding/GNGLanding';
-import GNGInstruction from './pages/gameInstruction/gngInstruction/GNGInstruction';
-import GNGGame from './pages/game/gngGame/GNGGame';
+// import CJSLanding from './pages/gameLanding/cjsLanding/CJSLanding';
+// import CJSInstruction from './pages/gameInstruction/cjsInstruction/CJSInstruction';
+// import CJSGame from './pages/game/cjsGame/CJSGame';
+// import GNGLanding from './pages/gameLanding/gngLanding/GNGLanding';
+// import GNGInstruction from './pages/gameInstruction/gngInstruction/GNGInstruction';
+// import GNGGame from './pages/game/gngGame/GNGGame';
 import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
-import { getDataFromLocalStorage } from './uitls/offline';
+// import { getDataFromLocalStorage } from './uitls/offline';
 
 function App() {
   useEffect(() => {
@@ -40,8 +40,6 @@ function App() {
     document.documentElement.style.setProperty('--this-sum', calSum + 'px');
     document.documentElement.style.setProperty('--vh', vh + 'px');
   }
-  const [userId, setUserId] = useState("XXXX");
-  const [userPhone, setUserPhone] = useState("XXXX");
   return (
     <>
       <Router>
