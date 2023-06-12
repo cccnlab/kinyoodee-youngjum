@@ -24,19 +24,6 @@ function App() {
     documentHeightWidth();
     window.addEventListener('resize', documentHeightWidth);
     window.addEventListener('orientationchange', documentHeightWidth);
-
-    let id = getDataFromLocalStorage('userId');
-    let phone = getDataFromLocalStorage('userPhone');
-    if (id !== null && phone !== null){
-      setUserId(id);
-      setUserPhone(phone);
-      // window.location.replace(window.location.origin + "#/landing");
-    } else {
-      if (window.location.href === "https://cccnlab.co/brain-exercises-hard/"){
-      } else {
-        window.location.replace("https://cccnlab.co/brain-exercises-hard/");
-      }
-    }
   }, [])
   
   function documentHeightWidth() {
@@ -63,12 +50,12 @@ function App() {
             <Route path="/spatial-span" element={<SSLanding />}></Route>
             <Route path="/spatial-span/instruction" element={<SSInstruction />}></Route>
             <Route path="/spatial-span/trial" element={<SSGame />}></Route>
-            <Route path="/conjunction-search" element={<CJSLanding />}></Route>
-            <Route path="/conjunction-search/instruction" element={<CJSInstruction />}></Route>
-            <Route path="/conjunction-search/trial" element={<CJSGame />}></Route>
-            <Route path="/go-nogo" element={<GNGLanding />}></Route>
-            <Route path="/go-nogo/instruction" element={<GNGInstruction />}></Route>
-            <Route path="/go-nogo/trial" element={<GNGGame />}></Route>
+            {/* <Route path="/conjunction-search" element={<CJSLanding />}></Route> */}
+            {/* <Route path="/conjunction-search/instruction" element={<CJSInstruction />}></Route> */}
+            {/* <Route path="/conjunction-search/trial" element={<CJSGame />}></Route> */}
+            {/* <Route path="/go-nogo" element={<GNGLanding />}></Route> */}
+            {/* <Route path="/go-nogo/instruction" element={<GNGInstruction />}></Route> */}
+            {/* <Route path="/go-nogo/trial" element={<GNGGame />}></Route> */}
           </Routes>
           <LoadingSpinner />
       </Router>
