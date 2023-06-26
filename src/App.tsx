@@ -15,8 +15,8 @@ import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
 
 function App() {
   function getQueryParamFromURL(param) {
-    const hash = window.location.hash;
-    const params = new URLSearchParams(hash.substring(1)); // Remove the '#' character
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.hash.substring(1)); // Remove the '#' character
   
     if (params.has(param)) {
       return params.get(param);
