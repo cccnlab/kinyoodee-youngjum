@@ -59,7 +59,7 @@ function App() {
     <>
       <Router>
           <Routes>
-            <Route path="/page" element={< LandingPage />}></Route>
+            <Route path="/" element={< LandingPage />}></Route>
             <Route path="/spatial-span" element={<SSLanding />}></Route>
             <Route path="/spatial-span/instruction" element={<SSInstruction />}></Route>
             <Route path="/spatial-span/trial" element={<SSGame />}></Route>
