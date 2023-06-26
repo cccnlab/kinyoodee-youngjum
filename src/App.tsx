@@ -14,8 +14,19 @@ import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
 // import { getDataFromLocalStorage } from './uitls/offline';
 
 function App() {
-  const idToken = getIdTokenFromQuery('idToken');
-  console.log(idToken);
+  function getQueryParamFromURL(param) {
+    const hash = window.location.hash;
+    const params = new URLSearchParams(hash.substring(1)); // Remove the '#' character
+  
+    if (params.has(param)) {
+      return params.get(param);
+    }
+  
+    return null;
+  }
+  
+  const idToken = getQueryParamFromURL('idToken');
+  console.log(idToken); // Outputs the value of the 'idToken' query parameter  
   
   useEffect(() => {
     const disablePinchZoom = (e) => {
@@ -23,7 +34,6 @@ function App() {
         e.preventDefault()
       }
     }
-    getIdTokenFromQuery('idToken');
     document.addEventListener("touchmove", disablePinchZoom, { passive: false })
     documentHeightWidth();
     window.addEventListener('resize', documentHeightWidth);
@@ -45,16 +55,11 @@ function App() {
     document.documentElement.style.setProperty('--vh', vh + 'px');
   }
 
-  function getIdTokenFromQuery(params) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const getUserId = urlParams.get(params);
-    console.log(params)
-  }
   return (
     <>
       <Router>
           <Routes>
-            <Route path="/" element={< LandingPage />}></Route>
+            <Route path="/page" element={< LandingPage />}></Route>
             <Route path="/spatial-span" element={<SSLanding />}></Route>
             <Route path="/spatial-span/instruction" element={<SSInstruction />}></Route>
             <Route path="/spatial-span/trial" element={<SSGame />}></Route>
