@@ -652,7 +652,7 @@ function SSInstruction() {
         </div>
       ) : null}
       <div className="row">
-        <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+      <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
             {<BreadCrumb />}
         </div>
         <div id="SSInstructionBody">

@@ -14,6 +14,7 @@ import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
 // import { getDataFromLocalStorage } from './uitls/offline';
 
 function App() {
+
   useEffect(() => {
     const disablePinchZoom = (e) => {
       if (e.touches.length > 1) {
@@ -21,6 +22,7 @@ function App() {
       }
     }
     document.addEventListener("touchmove", disablePinchZoom, { passive: false })
+    getUserIdFromQuery();
     documentHeightWidth();
     window.addEventListener('resize', documentHeightWidth);
     window.addEventListener('orientationchange', documentHeightWidth);
@@ -39,6 +41,12 @@ function App() {
     document.documentElement.style.setProperty('--this-height', calHeight + 'px');
     document.documentElement.style.setProperty('--this-sum', calSum + 'px');
     document.documentElement.style.setProperty('--vh', vh + 'px');
+  }
+
+  function getUserIdFromQuery() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const getUserId = urlParams.get('userId');
+    console.log(getUserId)
   }
   return (
     <>
