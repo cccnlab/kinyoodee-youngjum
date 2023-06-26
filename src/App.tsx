@@ -14,15 +14,17 @@ import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
 // import { getDataFromLocalStorage } from './uitls/offline';
 
 function App() {
-
+  const idToken = getIdTokenFromQuery('idToken');
+  console.log(idToken);
+  
   useEffect(() => {
     const disablePinchZoom = (e) => {
       if (e.touches.length > 1) {
         e.preventDefault()
       }
     }
+    getIdTokenFromQuery('idToken');
     document.addEventListener("touchmove", disablePinchZoom, { passive: false })
-    getUserIdFromQuery();
     documentHeightWidth();
     window.addEventListener('resize', documentHeightWidth);
     window.addEventListener('orientationchange', documentHeightWidth);
@@ -43,10 +45,10 @@ function App() {
     document.documentElement.style.setProperty('--vh', vh + 'px');
   }
 
-  function getUserIdFromQuery() {
+  function getIdTokenFromQuery(params) {
     const urlParams = new URLSearchParams(window.location.search);
-    const getUserId = urlParams.get('userId');
-    console.log(getUserId)
+    const getUserId = urlParams.get(params);
+    console.log(params)
   }
   return (
     <>
