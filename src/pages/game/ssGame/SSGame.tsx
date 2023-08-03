@@ -27,7 +27,12 @@ const allProbe: number[] = [1,2,3,4,5,6];
 const probeAngularPosition: number[] = [45, 90, 135, 225, 270, 315];
 const probeShape: string = 'circle';
 const probeParams: string = 'radius'; 
-const radius: string = (getComputedStyle(document.documentElement).getPropertyValue('--cir-base-unit') + " / 2 " );
+// const radius: string = (getComputedStyle(document.documentElement).getPropertyValue('--cir-base-unit') + " / 2 " ); // this isn't work 
+const radius: number = (()=>{
+    // 13.61 come from --cir-base-unit in css
+    const baseValue = (document.documentElement.clientWidth + document.documentElement.clientHeight) / (13.61*2); 
+    return Number.parseFloat(baseValue.toFixed(2)); 
+})();
 const cueColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-color');
 const cueBorderColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-border-color');
 const restColor: string = getComputedStyle(document.documentElement).getPropertyValue('--rest-color');
@@ -37,7 +42,7 @@ const maxFailStreakCount: number = 2;
 const maxFailCount: number = 3; 
 
 // Initaial values
-let trialNumber = 20;
+let trialNumber = 3;
 let currSpan = initialSpan;
 let currTrial: number = 0;
 let allSpan: number[] = [];
@@ -54,6 +59,7 @@ let checkAns: number[]  = [];
 let enterStruggleTimeCount: number = 0;
 let struggleTime: boolean = false;
 let isTest: boolean = false;
+let allAnswerEnableTime: string[] = [];
 let allReactionTime: string[]  = [];
 let reactionTime: number[] = [];
 let allReactionTrial: number[] = [];
@@ -68,7 +74,10 @@ let summaryCorrect: number = 0;
 let sumScores: number  = 0;
 let total: number = 0;
 let score: number;
+let sumCorrectSpan: number;
 let trialStruct: any[] = [];
+let testStartTime: string = "";
+let testEndTime: string = "";
 let cueStartTime: any[] = [];
 let cueEndTime: any[] = [];
 let startTime : number = 0;
@@ -93,6 +102,7 @@ function SSGame(props) {
   const [isItDone, setIsItDone] = useState(false);
 
   useEffect(() => {
+      testStartTime = thisTime();
       initiateData();
       gameLogicSchemeResult = gameLogicScheme(trialNumber, flashDuration, flashInterval, initialSpan, probeNumber, probeAngularPosition, rampingCorrectCount, maxFailStreakCount, maxFailCount);
       progressBarElement = document.getElementById("progressBar") as HTMLProgressElement;
@@ -424,6 +434,7 @@ function seqGenerator() {
               $('#goSignal').html("");
               $('#goSignal').html("ตาคุณ");
               startTime = timeStart();
+              allAnswerEnableTime.push(thisTime());
               $('.cirButton').removeClass('hoverDisabled');
               $('.cirButton').addClass('readyToClick');
               isTest = true;
@@ -553,13 +564,21 @@ function seqGenerator() {
   }
 
   function Done() {
+      testEndTime = thisTime();
       setIsItDone(true);
       let end = endTime();
       score = total;
-      trialDataResult = trialData(allSpan, cueDataResult, probeDataResult, answerDataResult);
-      scoringDataResult = scoringData(trialNumber, spanMultiplier, score);
+      trialDataResult = trialData(allSpan, cueDataResult, probeDataResult, allAnswerEnableTime, answerDataResult);
+    //   scoringDataResult = scoringData(trialNumber, spanMultiplier, score);
       metricDataResult = metricData(trialNumber, summaryCorrect, spanInCorrectAns, enterStruggleTimeCount);
-      postEntryResult = postEntry(trialDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
+      postEntryResult = postEntry(trialDataResult, gameLogicSchemeResult, score, metricDataResult);
+      axios.post('https://hwsrv-1063269.hostwindsdns.com/kyd-portal/spatial-span/post', postEntryResult)
+            .then(function (postEntryResult) {
+                console.log(postEntryResult)
+            })
+            .catch(function (error) {
+                console.log('error')
+            });
   }
 
   function cueData(currSeq: string | any[], cueColor: string, cueBorderColor: string, cueStartTime: any[], cueEndTime: any[]){
@@ -581,7 +600,7 @@ function seqGenerator() {
       return cueDataResult;
   }
 
-  function probeData(probeNumber: number, allProbe: any[], restColor: string, restBorderColor: string, probeShape: string, probeParams: string, radius: string, probeAngularPosition: any[]){
+  function probeData(probeNumber: number, allProbe: any[], restColor: string, restBorderColor: string, probeShape: string, probeParams: string, radius: number, probeAngularPosition: any[]){
       let obj_in_trial: any[] = [];
 
       for (let i = 0; i < probeNumber; i++) {
@@ -619,7 +638,7 @@ function seqGenerator() {
       return answerDataResult;
   }
 
-  function trialData(allSpan: number[], cueDataResult: any[], probeDataResult: any[], answerDataResult: any[]){
+  function trialData(allSpan: number[], cueDataResult: any[], probeDataResult: any[], allAnswerEnableTime: string[], answerDataResult: any[]){
       
       for (let i = 0; i < trialNumber; i++) {
           let obj_to_append;
@@ -627,6 +646,7 @@ function seqGenerator() {
               "spanSize" : allSpan[i],
               "cueData" : cueDataResult[i],
               "probeData" : probeDataResult[i],
+              "answerEnableTime": allAnswerEnableTime[i],
               "answerData" : answerDataResult[i],
               "mode" : 'forward'
           }
@@ -661,49 +681,61 @@ function seqGenerator() {
 
   function metricData(trialNumber: number, summaryCorrect: number, spanInCorrectAns: any[], enterStruggleTimeCount: number){
       spanInCorrectAns.sort((a,b) => a-b);
+      sumCorrectSpan =  spanInCorrectAns.reduce((sum, span) => {
+            return sum + span;
+      });
       let metricName 
-          = ['correctCount', 
-              'incorrectCount', 
+          = [ 'correctCount', 
+              'incorrectCount',
+              'accuracy', 
               'struggleTimeCount', 
-              'highestSpan'];
+              'highestSpan',
+              'averageSpan',
+              'averageReactionTime'];
       let metricValue 
           = [summaryCorrect, 
               trialNumber - summaryCorrect, 
+              (summaryCorrect / trialNumber) * 100, 
               enterStruggleTimeCount, 
-              spanInCorrectAns[spanInCorrectAns.length - 1]];
-      let metricUnit = [null, null, null, null, null];
+              spanInCorrectAns[spanInCorrectAns.length - 1],
+              sumCorrectSpan / spanInCorrectAns.length,
+              avgHitRt];
+      let metricUnit = [null, null, '%', null, null, null, 'ms'];
       let metricDescription 
           = ['Total number of correct trials', 
               'Total number of incorrect trials', 
+              'The accuracy of all trials',
               'Total number of entered struggle loop', 
-              'The highest span that user reached'];
+              'The highest span that user reached',
+              'The average span that user entered',
+              'The average time per trials that hit'];
       for (let i = 0; i < metricName.length; i++){
           let obj_to_append
           obj_to_append = {
-              "metricName" : metricName[i],
+              "name" : metricName[i],
               "value" : metricValue[i],
               "unit" : metricUnit[i],
-              "description" : metricDescription[i]
+              "desc" : metricDescription[i]
           }
           metricDataResult.push(obj_to_append);
       }    
       return metricDataResult;
   }
 
-  function postEntry(trialDataResult: any[], gameLogicSchemeResult: { game: string; schemeName: string; version: number; variant: string; parameters: { trialNumber: { value: any; unit: null; description: string }; flashDuration: { value: any; unit: string; description: string }; flashInterval: { value: any; unit: string; description: string }; initialSpan: { value: any; unit: null; description: string }; probeNumber: { value: any; unit: null; description: string }; probeAngularPosition: { value: any; unit: string; description: string }; rampingCorrectCount: { value: any; unit: null; description: string }; maxFailStreakCount: { value: any; unit: null; description: string }; maxFailCount: { value: any; unit: null; description: string } }; description: string }, scoringDataResult: any[], metricDataResult: any[]){
+  function postEntry(trialDataResult: any[], gameLogicSchemeResult: { game: string; schemeName: string; version: number; variant: string; parameters: { trialNumber: { value: any; unit: null; description: string }; flashDuration: { value: any; unit: string; description: string }; flashInterval: { value: any; unit: string; description: string }; initialSpan: { value: any; unit: null; description: string }; probeNumber: { value: any; unit: null; description: string }; probeAngularPosition: { value: any; unit: string; description: string }; rampingCorrectCount: { value: any; unit: null; description: string }; maxFailStreakCount: { value: any; unit: null; description: string }; maxFailCount: { value: any; unit: null; description: string } }; description: string }, score: number, metricDataResult: any[]){
       postEntryResult = {
-        //   "userId" : props.userId,
-        //   "userPhone" : props.userPhone,
-          "profileID" : "TOK",
-          "data" : {
-              "rawData" : {
-                  "trialData" : trialDataResult,
-                  "description" : 'all important data per trial'
-              },
-              "gameLogicScheme" : gameLogicSchemeResult,
-              "scoringData" : scoringDataResult,
-              "metricData" : metricDataResult
-          }
+        "userId" : props.userId,
+        "start" : testStartTime,
+        "end" : testEndTime,
+        "score" : score,
+        "scoringVersion" : "1.0",
+        "metrics" : metricDataResult,
+        "rawData" : {
+            "trialData" : trialDataResult,
+            "description" : 'all important data per trial'
+        },
+        "gameLogicScheme" : gameLogicSchemeResult,
+        "ref" : props.refId,
       }
       return postEntryResult;
   }
@@ -729,7 +761,7 @@ function seqGenerator() {
             });
       }
 
-        avgHitRt = sumHitRt / 1000 / hitRt.length;
+        avgHitRt = sumHitRt / hitRt.length;
       
       if (scorePerTrial.length !== 0){
           sumScores = scorePerTrial.reduce((sum, score) => {
@@ -794,6 +826,5 @@ function thisTime() {
   let thisTime = moment().format('YYYY-MM-DDTkk:mm:ss.SSSSSS');
   return thisTime;
 }
-
 
 
