@@ -10,8 +10,6 @@ function LoadingSpinner(props:{loadingTime?: number, fetchTime?: boolean}) {
             setTimeout(() => {
                 setIsLoading(false);
             }, props.loadingTime || 500); // if loadingTime isn't set then it will be set to 500
-        } else if (props.fetchTime === false){
-            setIsLoading(false);
         }
     }, [])
 
