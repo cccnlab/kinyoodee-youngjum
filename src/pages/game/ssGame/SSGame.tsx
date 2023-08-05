@@ -15,6 +15,7 @@ import { Shuffle } from '../../../scripts/shuffle';
 import { samplingFromList } from '../../../uitls/main';
 import moment from 'moment';
 import axios from 'axios';
+import LoadingSpinner from '../../../components/loadingSpinner/LoadingSpinner';
 
 let progressBarElement: HTMLProgressElement;
 
@@ -100,6 +101,7 @@ function SSGame(props) {
   const [losingSound] = useSound(losingSoundSrc);
   const [progressValue, setProgressValue] = useState(0);
   const [isItDone, setIsItDone] = useState(false);
+  const [isItFetching, setIsItFetching] = useState(false);
 
   useEffect(() => {
       testStartTime = thisTime();
@@ -566,18 +568,23 @@ function seqGenerator() {
   function Done() {
       testEndTime = thisTime();
       setIsItDone(true);
+      setIsItFetching(true); // make loading spinner appear while 
       let end = endTime();
       score = total;
       trialDataResult = trialData(allSpan, cueDataResult, probeDataResult, allAnswerEnableTime, answerDataResult);
     //   scoringDataResult = scoringData(trialNumber, spanMultiplier, score);
       metricDataResult = metricData(trialNumber, summaryCorrect, spanInCorrectAns, enterStruggleTimeCount);
       postEntryResult = postEntry(trialDataResult, gameLogicSchemeResult, score, metricDataResult);
+      //   axios.post('http://127.0.0.1:8000/kyd-portal/spatial-span/post', postEntryResult)
       axios.post('https://hwsrv-1063269.hostwindsdns.com/kyd-portal/spatial-span/post', postEntryResult)
             .then(function (postEntryResult) {
                 console.log(postEntryResult)
             })
             .catch(function (error) {
                 console.log('error')
+            })
+            .finally(function () {
+                setIsItFetching(false); // stop loading spinner when finished fetching
             });
   }
 
@@ -786,7 +793,8 @@ function seqGenerator() {
   } 
 
   function backToLandingPage() {
-    navigate('/');
+      navigate('/');
+      refreshPage();
   }
 
   return (
@@ -805,6 +813,7 @@ function seqGenerator() {
               <div className="SSGameEnterButton"></div>
             </div>
         </div>
+        {isItFetching && <LoadingSpinner fetchTime={isItFetching}/>}  
         {isItDone ? 
         <div>
             {<ScoreSummaryOverlay sumScores={total} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
@@ -823,7 +832,7 @@ function endTime() {
 }
 
 function thisTime() {
-  let thisTime = moment().format('YYYY-MM-DDTkk:mm:ss.SSSSSS');
+  let thisTime = moment().format('YYYY-MM-DDTkk:mm:ss.SSSSSS+0700');
   return thisTime;
 }
 

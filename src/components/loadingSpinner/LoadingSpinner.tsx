@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import './LoadingSpinner.scss'
 
-function LoadingSpinner() {
+function LoadingSpinner(props:{loadingTime?: number, fetchTime?: boolean}) {
     const [isLoading, setIsLoading] = useState(false);
     
     useEffect(() => {
         setIsLoading(true);
-        setTimeout(() => {
+        if (props.fetchTime === undefined) { // fetchTime will be defined when finished the test 
+            setTimeout(() => {
+                setIsLoading(false);
+            }, props.loadingTime || 500); // if loadingTime isn't set then it will be set to 500
+        } else if (props.fetchTime === false){
             setIsLoading(false);
-        }, 500);
+        }
     }, [])
 
   return (

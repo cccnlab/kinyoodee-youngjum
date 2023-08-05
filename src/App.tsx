@@ -41,6 +41,8 @@ function App() {
         userId = getDataFromLocalStorage('userId');
         refId = getDataFromLocalStorage('ref');
     }
+    console.log(userId)
+    console.log(refId)
   }
 
   // call the function to check user and ref data
