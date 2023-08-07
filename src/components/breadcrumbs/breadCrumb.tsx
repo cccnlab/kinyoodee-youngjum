@@ -45,13 +45,19 @@ export default function BreadCrumb() {
       setDisableGameButton('disabled');
     } 
   }, [])
+
+  const handleDisabledLinkClick = (event) => {
+    event.preventDefault();
+  };
   
   return (
     <nav className="flex h-fit justify-between" aria-label="Breadcrumb">
       <ol role="list" className="flex items-center space-x-4">
         <li>
           <div>
-            <a href={'#/'} className={`text-gray-400 hover:text-gray-500 ${disableHomeButton}`}>
+            <a href={'#/'} 
+               className={`text-gray-400 hover:text-gray-500 ${disableHomeButton}`}
+               onClick={disableHomeButton ? handleDisabledLinkClick : undefined}>
               <HomeIcon className="h-5 w-5 sm:h-8 sm:w-8 flex-shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
             </a>
@@ -71,6 +77,7 @@ export default function BreadCrumb() {
               <a
                 href={page.href}
                 className={`ml-4 text-sm sm:text-lg font-medium sm:font-medium text-gray-500 ${disableGameButton}`}
+                onClick={disableGameButton ? handleDisabledLinkClick : undefined}
                 aria-current={page.current ? 'page' : undefined}
               >
                 {page.name}
