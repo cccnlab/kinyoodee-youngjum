@@ -41,8 +41,8 @@ export default function BreadCrumb() {
     }
 
     if (pathName.includes('/instruction') || pathName.includes('/trial')) {
-      setDisableHomeButton(' disabled')
-      setDisableGameButton(' disabled');
+      setDisableHomeButton('disabled');
+      setDisableGameButton('disabled');
     } 
   }, [])
   
@@ -51,7 +51,7 @@ export default function BreadCrumb() {
       <ol role="list" className="flex items-center space-x-4">
         <li>
           <div>
-            <a href={'#/'} className={`text-gray-400 hover:text-gray-500 + ${disableHomeButton}`}>
+            <a href={'#/'} className={`text-gray-400 hover:text-gray-500 ${disableHomeButton}`}>
               <HomeIcon className="h-5 w-5 sm:h-8 sm:w-8 flex-shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
             </a>
@@ -70,7 +70,7 @@ export default function BreadCrumb() {
               </svg>
               <a
                 href={page.href}
-                className={`ml-4 text-sm sm:text-lg font-medium sm:font-medium text-gray-500 + ${disableGameButton}`}
+                className={`ml-4 text-sm sm:text-lg font-medium sm:font-medium text-gray-500 ${disableGameButton}`}
                 aria-current={page.current ? 'page' : undefined}
               >
                 {page.name}
