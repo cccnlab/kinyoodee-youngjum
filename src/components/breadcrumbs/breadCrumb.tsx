@@ -10,6 +10,8 @@ export default function BreadCrumb() {
   const [gameButtonLink, setGameButtonLink] = useState('#/');
   const [disableHomeButton, setDisableHomeButton] = useState('');
   const [disableGameButton, setDisableGameButton] = useState('');
+  const [gameSelect, setGameSelect] = useState('');
+  const [gameStarted, setGameStarted] = useState(false);
   // const [hideUserId, setHideUserId] = useState(false);
   const location = useLocation();
   const pathName = location.pathname;
@@ -29,12 +31,15 @@ export default function BreadCrumb() {
     } else {
       // setHideUserId(true);
       if (pathName.includes('/spatial-span')) {
+        setGameSelect('spatial-span');
         setHeaderText(SSHeaderText);
         setGameButtonLink('#/spatial-span');
       } else if (pathName.includes('/conjunction-search')) {
+        setGameSelect('conjunction-search');
         setHeaderText(CJSHeaderText);
         setGameButtonLink('#/conjunction-search');
       } else if (pathName.includes('/go-nogo')) {
+        setGameSelect('go-nogo');
         setHeaderText(GNGHeaderText);
         setGameButtonLink('#/go-nogo');
       }
@@ -43,21 +48,18 @@ export default function BreadCrumb() {
     if (pathName.includes('/instruction') || pathName.includes('/trial')) {
       setDisableHomeButton('disabled');
       setDisableGameButton('disabled');
-    } 
+    } else if (pathName.includes('/trial')) {
+      setGameStarted(true);
+    }
   }, [])
-
-  const handleDisabledLinkClick = (event) => {
-    event.preventDefault();
-  };
   
   return (
     <nav className="flex h-fit justify-between" aria-label="Breadcrumb">
       <ol role="list" className="flex items-center space-x-4">
         <li>
           <div>
-            <a href={'#/'} 
-               className={`text-gray-400 hover:text-gray-500 ${disableHomeButton}`}
-               onClick={disableHomeButton ? handleDisabledLinkClick : undefined}>
+            <a href={gameStarted ? `#/${gameSelect}/trial` : '#/'} 
+               className={`text-gray-400 hover:text-gray-500 ${disableHomeButton}`}>
               <HomeIcon className="h-5 w-5 sm:h-8 sm:w-8 flex-shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
             </a>
@@ -77,7 +79,6 @@ export default function BreadCrumb() {
               <a
                 href={page.href}
                 className={`ml-4 text-sm sm:text-lg font-medium sm:font-medium text-gray-500 ${disableGameButton}`}
-                onClick={disableGameButton ? handleDisabledLinkClick : undefined}
                 aria-current={page.current ? 'page' : undefined}
               >
                 {page.name}
