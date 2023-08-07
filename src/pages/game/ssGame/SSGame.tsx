@@ -13,7 +13,7 @@ import $ from 'jquery';
 import RotateAlert from '../../../components/rotateAlert/RotateAlert';
 import { Shuffle } from '../../../scripts/shuffle';
 import { samplingFromList } from '../../../uitls/main';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import axios from 'axios';
 import LoadingSpinner from '../../../components/loadingSpinner/LoadingSpinner';
 
@@ -43,7 +43,7 @@ const maxFailStreakCount: number = 2;
 const maxFailCount: number = 3; 
 
 // Initaial values
-let trialNumber = 3;
+let trialNumber = 10;
 let currSpan = initialSpan;
 let currTrial: number = 0;
 let allSpan: number[] = [];
@@ -105,6 +105,7 @@ function SSGame(props) {
 
   useEffect(() => {
       testStartTime = thisTime();
+      console.log(testStartTime);
       initiateData();
       gameLogicSchemeResult = gameLogicScheme(trialNumber, flashDuration, flashInterval, initialSpan, probeNumber, probeAngularPosition, rampingCorrectCount, maxFailStreakCount, maxFailCount);
       progressBarElement = document.getElementById("progressBar") as HTMLProgressElement;
@@ -832,8 +833,9 @@ function endTime() {
 }
 
 function thisTime() {
-  let thisTime = moment().format('YYYY-MM-DDTkk:mm:ss.SSSSSS+0700');
+  let thisTime = moment().tz('Asia/Bangkok').format('YYYY-MM-DDTkk:mm:ss.SSSSSS').replace('24','00');
   return thisTime;
 }
+
 
 
