@@ -833,7 +833,7 @@ function endTime() {
 }
 
 function thisTime() {
-  let thisTime = moment().tz('Asia/Bangkok').format('YYYY-MM-DDTkk:mm:ss.SSSSSS').replace('24','00');
+  let thisTime = moment().utc().format('YYYY-MM-DDTkk:mm:ss.SSS').replace('24','00');
   return thisTime;
 }
 
