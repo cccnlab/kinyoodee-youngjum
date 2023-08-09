@@ -105,7 +105,6 @@ function SSGame(props) {
 
   useEffect(() => {
       testStartTime = thisTime();
-      console.log(testStartTime);
       initiateData();
       gameLogicSchemeResult = gameLogicScheme(trialNumber, flashDuration, flashInterval, initialSpan, probeNumber, probeAngularPosition, rampingCorrectCount, maxFailStreakCount, maxFailCount);
       progressBarElement = document.getElementById("progressBar") as HTMLProgressElement;

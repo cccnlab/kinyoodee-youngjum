@@ -45,12 +45,14 @@ export default function BreadCrumb() {
       }
     }
 
-    if (pathName.includes('/instruction') || pathName.includes('/trial')) {
+    if (pathName.includes('/instruction')) {
       setDisableHomeButton('disabled');
       setDisableGameButton('disabled');
     } else if (pathName.includes('/trial')) {
+      setDisableHomeButton('disabled');
+      setDisableGameButton('disabled');
       setGameStarted(true);
-    }
+    } 
   }, [])
   
   return (
