@@ -6,11 +6,11 @@
 #LandingPageBody {
     height: 85.78vh;
     /* height: calc(var(--vh, 1vh) * 85.78); */
-    padding: 
+    /* padding: 
         0
         calc(var(--this-width) / 17.73)
         0
-        calc(var(--this-width) / 17.73);
+        calc(var(--this-width) / 17.73); */
     padding-top: unset;
 }
 
