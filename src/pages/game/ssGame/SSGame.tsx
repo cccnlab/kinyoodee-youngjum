@@ -43,7 +43,7 @@ const maxFailStreakCount: number = 2;
 const maxFailCount: number = 3; 
 
 // Initaial values
-let trialNumber = 10;
+let trialNumber = 20;
 let currSpan = initialSpan;
 let currTrial: number = 0;
 let allSpan: number[] = [];
